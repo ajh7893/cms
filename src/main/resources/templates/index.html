@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('CMS 홈')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main>
+    <div class="container">
+        <h1>콘텐츠 관리 시스템</h1>
+        <p>기존 <strong>dmktweb</strong> 데이터베이스의 게시글과 페이지를 조회합니다.</p>
+        <div class="home-links">
+            <a th:href="@{/posts}">📋 게시판 보기<br><small>bbs_board</small></a>
+            <a th:href="@{/contents}">📄 페이지 보기<br><small>contents</small></a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

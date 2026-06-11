@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+  공통 조각(fragment) 모음.
+  각 페이지에서 th:replace 로 머리말/꼬리말을 끼워 넣는다.
+-->
+<head th:fragment="head(pageTitle)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">CMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header th:fragment="header" class="site-header">
+    <div class="container">
+        <a class="logo" th:href="@{/}">📄 CMS</a>
+        <nav>
+            <a th:href="@{/posts}">게시판</a>
+            <a th:href="@{/contents}">페이지</a>
+        </nav>
+    </div>
+</header>
+
+<footer th:fragment="footer" class="site-footer">
+    <div class="container">
+        <small>회사/기관 홈페이지 CMS · 학습용 · 기존 dmktweb 데이터 연동</small>
+    </div>
+</footer>
+
+</body>
+</html>

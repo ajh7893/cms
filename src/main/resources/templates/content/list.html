@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('페이지')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main>
+    <div class="container">
+        <h1>페이지 목록</h1>
+
+        <table class="board">
+            <thead>
+            <tr>
+                <th class="num">번호</th>
+                <th>제목</th>
+                <th class="center" style="width:120px">유형</th>
+                <th class="center" style="width:180px">등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="content : ${contents}">
+                <td class="num" th:text="${content.id}">1</td>
+                <td>
+                    <a th:href="@{/contents/{id}(id=${content.id})}" th:text="${content.subject}">제목</a>
+                </td>
+                <td class="center" th:text="${content.contentsType}">type</td>
+                <td class="center" th:text="${content.regDate != null ? #temporals.format(content.regDate, 'yyyy-MM-dd HH:mm') : ''}">2024-01-01</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(contents)}">
+                <td colspan="4" class="center" style="padding:40px;color:#99a;">페이지가 없습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

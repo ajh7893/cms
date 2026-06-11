@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${post.subject})}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main>
+    <div class="container">
+        <div class="card">
+            <h1 th:text="${post.subject}">제목</h1>
+            <div class="post-meta">
+                <span th:text="'작성자: ' + ${post.writer}">작성자</span>
+                · <span th:text="'조회 ' + ${post.viewCount}">조회</span>
+                · <span th:text="${post.writeDate}">작성일</span>
+            </div>
+            <!-- REMARK 는 HTML 에디터로 작성된 내용이므로 utext 로 렌더링 -->
+            <div class="post-body" th:utext="${post.content}">본문</div>
+        </div>
+        <p style="margin-top:20px">
+            <a class="btn secondary" th:href="@{/posts(boardId=${post.boardId})}">← 목록으로</a>
+        </p>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

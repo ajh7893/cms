@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('게시판')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main>
+    <div class="container">
+        <h1>게시판 <small th:text="'(게시판 #' + ${boardId} + ')'">(#41)</small></h1>
+
+        <table class="board">
+            <thead>
+            <tr>
+                <th class="num">번호</th>
+                <th>제목</th>
+                <th class="center" style="width:120px">작성자</th>
+                <th class="center" style="width:90px">조회</th>
+                <th class="center" style="width:160px">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td class="num" th:text="${post.id}">1</td>
+                <td>
+                    <span th:if="${post.notice}" class="badge">공지</span>
+                    <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.subject}">제목</a>
+                </td>
+                <td class="center" th:text="${post.writer}">작성자</td>
+                <td class="center" th:text="${post.viewCount}">0</td>
+                <td class="center" th:text="${post.writeDate}">2024-01-01</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(posts)}">
+                <td colspan="5" class="center" style="padding:40px;color:#99a;">게시글이 없습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: cms
+
+  # ── 데이터베이스 연결 (기존 dmktweb 사용) ──
+  datasource:
+    url: jdbc:mysql://localhost:3306/dmktweb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ── JPA / Hibernate ──
+  jpa:
+    hibernate:
+      # ⚠️ 매우 중요: 운영 스키마를 절대 건드리지 않도록 none 고정.
+      #   create/update 로 두면 Hibernate가 기존 테이블을 변경/삭제할 수 있다.
+      ddl-auto: none
+    show-sql: true            # 실행되는 SQL을 콘솔에 출력 (학습용)
+    properties:
+      hibernate:
+        format_sql: true      # SQL 보기 좋게 정렬
+    open-in-view: false       # 권장 설정: 트랜잭션 밖 지연로딩 방지
+
+  # ── Thymeleaf ──
+  thymeleaf:
+    cache: false              # 개발 중에는 캐시 끄기 (HTML 수정 즉시 반영)
+
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+    session:
+      # 세션 ID 를 URL(;jsessionid=...)에 노출하지 않고 쿠키로만 추적
+      tracking-modes: cookie
+      cookie:
+        http-only: true     # JS 에서 세션 쿠키 접근 차단 (XSS 완화)
+
+logging:
+  level:
+    org.hibernate.SQL: debug  # SQL 로깅
